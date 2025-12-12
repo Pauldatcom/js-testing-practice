@@ -2,13 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { fetchUser, wait } from './wait.js';
 
 describe('wait', () => {
-  it('should resolve after approximately 300ms', async () => {
+  it('should resolve after 300ms', async () => {
     const start = Date.now();
     
     await wait();
     
     const elapsed = Date.now() - start;
-    // Allow some tolerance (280-350ms) for timing variations
     expect(elapsed).toBeGreaterThanOrEqual(280);
     expect(elapsed).toBeLessThan(350);
   });
@@ -22,12 +21,7 @@ describe('wait', () => {
 describe('fetchUser', () => {
   it('should fetch user by id', async () => {
     const user = await fetchUser(1);
-    
-    // Check essential user properties exist
-    expect(user).toHaveProperty('id', 1);
-    expect(user).toHaveProperty('name');
-    expect(user).toHaveProperty('email');
-    expect(user).toHaveProperty('username');
+    expect(user).toHaveProperty('id', 999); // BROKEN: expecting wrong ID
   });
 
   it('should fetch different users with different ids', async () => {
@@ -39,3 +33,4 @@ describe('fetchUser', () => {
     expect(user1.name).not.toBe(user2.name);
   });
 });
+
