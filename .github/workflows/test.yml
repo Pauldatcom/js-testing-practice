@@ -19,8 +19,16 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
 
-      - name: Run tests
+      - name: Install exercice3 dependencies
+        run: npm ci
+        working-directory: tp2/exercice3
+
+      - name: Run root tests
         run: npm test -- --run
+
+      - name: Run exercice3 tests
+        run: npm test -- --run
+        working-directory: tp2/exercice3
